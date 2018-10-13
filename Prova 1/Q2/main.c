@@ -1,71 +1,33 @@
+//CÓDIGO BASE PARA APLICAR A SUA LINHA DE RACIOCÍNIO 
+
 #include <stdio.h>
-#include <stdlib.h>
+//Pode usar esse código como base a aplicar vetores juntamente com a estrutura lista, 
+//para solucioná-lo. FAÇA AS MODIFICAÇÕES QUE ACHAREM NECESSÁRIAS
 
-typedef struct nodo
-{
-   char info;
-   struct nodo *prox;
+int main(void) {
+	int col,j;
+ 	int anterior;
 
-} Nodo;
+ 	int n =4;
+ 	
+	anterior = 1;
+ 	printf("%d\n",anterior);
 
-void inserir(Nodo **inicio,int n)
-{
-    Nodo *atual, *novo, *anterior;
-    novo = (Nodo *) malloc(sizeof(Nodo));
-    atual = *inicio;
-    anterior = NULL;
-
-      
-    novo->info = n;
-    
-    while(atual != NULL && atual->info > n){
-    	anterior = atual;
-        atual = atual->prox;
-    }
-    
-    novo->prox = atual;
-  	
-    if(anterior == NULL){
-    	*inicio = novo;
-    } else{
-         anterior->prox = novo;
-    }
+ 	int linha_atual = 1;
+	col = 2;
+	linha_atual = 1;
+	for(j=1;j<col && linha_atual <= n;) {
+		if(j==1) printf("1 ");
+  	        anterior = anterior*(linha_atual-j+1)/j;
+   		printf("%d ", anterior);
+   		j++;
+   		if (j == col) {
+			anterior = 1;
+			linha_atual++;
+			col = linha_atual+1;
+			j=1;
+			printf("\n");
+   		}
+	}
 }
-
-
-//a lógica só funciona se for colocado o valor 2 para N
-void mostraLista(Nodo *inicio,int n){
-    	
-    int i = inicio->info;
-    int ultimo = i+1;
-    i--;
-    int fimLinha = i;
-
-    printf("%d \n", inicio->info);
-    do{ printf("%d ",i);
-	i++;
-    }while(i<=ultimo);
-    
-    printf("\n"); 	
-
-    ultimo++;
-    fimLinha--;		
-    for(int i=fimLinha;i<=ultimo;i++){
-    	 printf("%d ",i);
-    }	
-}
-
-
-void main(){
-    Nodo *inicio = NULL;
-    int n = 2;
-   
-    inserir(&inicio,n);
-    do{ n--;
- 	inserir(&inicio,n);	
-    }while(n>0);
-
-    mostraLista(inicio,n);
-}
-
 
